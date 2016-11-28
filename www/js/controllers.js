@@ -41,16 +41,14 @@ angular.module('starter.controllers', [])
   };
 })
 
-.controller('PlaylistsCtrl', function($scope) {
-  $scope.playlists = [
-    { title: 'Reggae', id: 1 },
-    { title: 'Chill', id: 2 },
-    { title: 'Dubstep', id: 3 },
-    { title: 'Indie', id: 4 },
-    { title: 'Rap', id: 5 },
-    { title: 'Cowbell', id: 6 }
+// This is the controller for the list of items
+.controller('ItemsController', function($scope) {
+  $scope.items = [
+    { title: 'Porch Rocker', id: 1, image: 'img/porch_rocker.jpg', owner: 'Molly', price: '$29.99'},
+    { title: 'Bottle of Snapple', id: 2, image: 'img/bottle.png', owner: 'Tierney', price: '$1.99'},
+    { title: 'Lipstick', id: 3, image: 'img/lipstick.jpg', owner: 'Zoey', price: '$14.99'}
   ];
 })
 
-.controller('PlaylistCtrl', function($scope, $stateParams) {
+.controller('ItemController', function($scope, $stateParams) {
 });
