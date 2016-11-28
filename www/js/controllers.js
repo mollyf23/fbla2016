@@ -42,12 +42,24 @@ angular.module('starter.controllers', [])
 })
 
 // This is the controller for the list of items
-.controller('ItemsController', function($scope) {
-  $scope.items = [
-    { title: 'Porch Rocker', id: 1, image: 'img/porch_rocker.jpg', owner: 'Molly', price: '$29.99'},
-    { title: 'Bottle of Snapple', id: 2, image: 'img/bottle.png', owner: 'Tierney', price: '$1.99'},
-    { title: 'Lipstick', id: 3, image: 'img/lipstick.jpg', owner: 'Zoey', price: '$14.99'}
-  ];
+.controller('ItemsController', function($scope, Items) {
+  $scope.items = Items.all();
+})
+
+// This is the controller for donating an item
+.controller('AddController', function($scope, $location, Items) {
+	$scope.donate = function() {
+		var item = {
+				title : 'BLipstick',
+				id : 3,
+				image : 'img/lipstick.jpg',
+				owner : 'Scubby',
+				price : '$17.93'
+		} 
+		Items.add(item);
+		$location.path("items");
+	}
+  $scope.items = Items.all();
 })
 
 .controller('ItemController', function($scope, $stateParams) {
