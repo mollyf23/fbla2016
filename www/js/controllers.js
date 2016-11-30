@@ -96,6 +96,10 @@ angular.module('starter.controllers', [])
 		    	user: 'Molly',
 		    	comment: commentText	    	
 		    }
+		    // if the comment array does not exist, create an empty array
+		    if (!$scope.item.comments) $scope.item.comments = [];
+		    
+		    // add the comment
 		    $scope.item.comments.push(comment);
 		  });
 		}
