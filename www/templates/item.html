@@ -1,5 +1,36 @@
-<ion-view view-title="Item">
-  <ion-content>
-    <h1>Item</h1>
-  </ion-content>
+<ion-view view-title="Item"> 
+	<ion-content>
+		<div class="list card">
+		
+			<div class="item">
+				<h2>{{item.title}}</h2>
+				<p>{{item.owner}}</p>
+			</div>
+		
+			<div class="item item-body">
+				<img class="full-image" src="{{item.image}}">
+				<h2>{{item.price}}</h2>
+				<p>{{item.details}}</p>
+			</div>
+		
+		</div>
+
+		<div class="list">
+			<div class="item-divider-with-button item item-button-right">
+			Comments
+
+    <button class="button button-positive">
+     Add Comment
+    </button>
+
+			</div>
+		
+			<div class="item" ng-repeat="comment in item.comments">
+				<h2>{{comment.user}}</h2>
+				<p>{{comment.comment}}</p>
+			</div>
+		
+		</div>
+		
+	</ion-content> 
 </ion-view>

@@ -17,7 +17,22 @@ angular.module('starter.services', [])
 		id : 2,
 		image : 'img/bottle.png',
 		owner : 'Tierney',
-		price : '$1.99'
+		price : '$1.99',
+		details: "a full bottle of snapple. It's peach flavored. Ice cold.",
+		comments: [
+	 		  { 
+				  user: "Molly",
+				  comment: "I really love peach Snapple"
+			  },
+			  { 
+				  user: "Tierney",
+				  comment: "Kiwi Strawberry is better!"
+			  },
+			  { 
+				  user: "Zoey",
+				  comment: "No it's not"
+			  }		  
+		]
 	 }, 
 	 {
 		title : 'Lipstick',
@@ -38,10 +53,10 @@ angular.module('starter.services', [])
     add: function(item) {
     	items.push(item);
     },
-    get: function(chatId) {
-      for (var i = 0; i < chats.length; i++) {
-        if (chats[i].id === parseInt(chatId)) {
-          return chats[i];
+    get: function(itemId) {
+      for (var i = 0; i < items.length; i++) {
+        if (items[i].id === parseInt(itemId)) {
+          return items[i];
         }
       }
       return null;

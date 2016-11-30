@@ -47,20 +47,22 @@ angular.module('starter.controllers', [])
 })
 
 // This is the controller for donating an item
-.controller('AddController', function($scope, $location, Items) {
+.controller('AddController', function($scope, $state, $ionicHistory, Items) {
 	$scope.donate = function() {
 		var item = {
 				title : 'BLipstick',
-				id : 3,
+				id : 4,
 				image : 'img/lipstick.jpg',
 				owner : 'Scubby',
 				price : '$17.93'
 		} 
 		Items.add(item);
-		$location.path("items");
+		$ionicHistory.nextViewOptions({disableBack: true})
+		$state.go("app.items");
 	}
   $scope.items = Items.all();
 })
 
-.controller('ItemController', function($scope, $stateParams) {
+.controller('ItemController', function($scope, $stateParams, Items) {
+	$scope.item = Items.get($stateParams.itemId);
 });
