@@ -63,6 +63,40 @@ angular.module('starter.controllers', [])
   $scope.items = Items.all();
 })
 
-.controller('ItemController', function($scope, $stateParams, Items) {
+.controller('ItemController', function($scope, $stateParams, $ionicPopup, Items) {
 	$scope.item = Items.get($stateParams.itemId);
+	
+	$scope.addComment = function() {
+		  $scope.data = {};
+
+		  // An elaborate, custom popup
+		  var myPopup = $ionicPopup.show({
+		    template: '<input type="text" ng-model="data.comment">',
+		    title: 'New Comment',
+		    scope: $scope,
+		    buttons: [
+		      { text: 'Cancel' },
+		      {
+		        text: '<b>Post</b>',
+		        type: 'button-positive',
+		        onTap: function(e) {
+		          if (!$scope.data.comment) {
+		            //don't allow the user to close unless he enters comment
+		            e.preventDefault();
+		          } else {
+		            return $scope.data.comment;
+		          }
+		        }
+		      }
+		    ]
+		  });
+
+		  myPopup.then(function(commentText) {
+		    var comment = {
+		    	user: 'Molly',
+		    	comment: commentText	    	
+		    }
+		    $scope.item.comments.push(comment);
+		  });
+		}
 });
