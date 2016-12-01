@@ -1,6 +1,6 @@
 angular.module('starter.controllers', [])
 
-.controller('AppCtrl', function($scope, $ionicModal, $timeout) {
+.controller('AppCtrl', function($scope, $ionicModal, $timeout, Users) {
 
   // With the new view caching in Ionic, Controllers are only called
   // when they are recreated or on app start, instead of every page change.
@@ -31,13 +31,10 @@ angular.module('starter.controllers', [])
 
   // Perform the login action when the user submits the login form
   $scope.doLogin = function() {
-    console.log('Doing login', $scope.loginData);
-
-    // Simulate a login delay. Remove this and replace with your login
-    // code if using a login system
-    $timeout(function() {
-      $scope.closeLogin();
-    }, 1000);
+	  var result = Users.authenticate($scope.loginData.username, $scope.loginData.password);
+	  if (result == true) {
+		  $scope.modal.hide();
+	  }
   };
 })
 
@@ -47,14 +44,18 @@ angular.module('starter.controllers', [])
 })
 
 // This is the controller for donating an item
-.controller('AddController', function($scope, $state, $ionicHistory, Items) {
+.controller('AddController', function($scope, $state, $ionicHistory, Items, Users) {
+	$scope.itemData = {}; 
 	$scope.donate = function() {
+		var user = Users.getAuthenticatedUser();
 		var item = {
-				title : 'BLipstick',
-				id : 4,
+				title : $scope.itemData.title,
+				id : Date.now(),
 				image : 'img/lipstick.jpg',
-				owner : 'Scubby',
-				price : '$17.93'
+				owner : user,
+				price : $scope.itemData.price,
+				details: $scope.itemData.details,
+				rating: $scope.itemData.rating
 		} 
 		Items.add(item);
 		$ionicHistory.nextViewOptions({disableBack: true})
@@ -63,7 +64,7 @@ angular.module('starter.controllers', [])
   $scope.items = Items.all();
 })
 
-.controller('ItemController', function($scope, $stateParams, $ionicPopup, Items) {
+.controller('ItemController', function($scope, $stateParams, $ionicPopup, Items, Users) {
 	$scope.item = Items.get($stateParams.itemId);
 	
 	$scope.addComment = function() {
@@ -92,8 +93,9 @@ angular.module('starter.controllers', [])
 		  });
 
 		  myPopup.then(function(commentText) {
+			var user = Users.getAuthenticatedUser();
 		    var comment = {
-		    	user: 'Molly',
+		    	user: user,
 		    	comment: commentText	    	
 		    }
 		    // if the comment array does not exist, create an empty array
