@@ -4,7 +4,7 @@
       <ion-item class="item item-thumbnail-left" ng-repeat="item in items track by item.id" href="#/app/items/{{item.id}}">
 	      <img src="{{item.image}}">
 	      <h2>{{item.title}}</h2>
-	      <p>{{item.owner}}, {{item.price}}</p>
+	      <p>{{item.owner}}, <span class="price">{{item.price}}</span></p>
       </ion-item>
     </ion-list>
   </ion-content>

@@ -40,6 +40,7 @@ angular.module('starter.services', [])
 		image : 'img/bottle.png',
 		owner : 'Tierney',
 		price : '$1.99',
+		rating: 'Brand New',
 		details: "a full bottle of snapple. It's peach flavored. Ice cold.",
 		comments: [
 	 		  { 
@@ -110,11 +111,16 @@ angular.module('starter.services', [])
 	{
 		userName : "Zoey",
 		password : 'mollballs123'
+	},
+	{
+		  userName: "Tommy",
+		  password: "tommy0"
 	}
-	
 	 ];
+	
 	if (storedUsers.length > 0) users = storedUsers;
-  return {
+
+	return {
 	    authenticate: function(userName, password) {
 	    	var user = this.get(userName, password);
 	    	if (user == null) {
