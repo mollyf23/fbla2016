@@ -6,6 +6,8 @@ var sass = require('gulp-sass');
 var minifyCss = require('gulp-minify-css');
 var rename = require('gulp-rename');
 var sh = require('shelljs');
+var $ = require('gulp-load-plugins')();
+var connect = require('gulp-connect');
 
 var paths = {
   sass: ['./scss/**/*.scss']
@@ -48,4 +50,13 @@ gulp.task('git-check', function(done) {
     process.exit(1);
   }
   done();
+});
+
+gulp.task('connect', function() {
+  connect.server({
+    root: ['www'],
+    livereload: true,
+    // Change this to '0.0.0.0' to access the server from outside.
+    port: 9000
+  });
 });
