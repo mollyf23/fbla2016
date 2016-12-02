@@ -71,7 +71,7 @@ angular.module('starter.controllers', [])
 		var item = {
 				title : $scope.itemData.title,
 				id : Date.now(),
-				image : 'img/lipstick.jpg',
+				image : $scope.imageSource,
 				owner : user,
 				price : $scope.itemData.price,
 				details: $scope.itemData.details,
@@ -82,6 +82,39 @@ angular.module('starter.controllers', [])
 		$state.go("app.items");
 	}
   $scope.items = Items.all();
+  $scope.uploadPhoto = function() {
+	  openFilePicker();
+	  
+  };
+  function setOptions(srcType) {
+	    var options = {
+	        // Some common settings are 20, 50, and 100
+	        quality: 50,
+	        destinationType: Camera.DestinationType.FILE_URI,
+	        // In this app, dynamically set the picture source, Camera or photo gallery
+	        sourceType: srcType,
+	        encodingType: Camera.EncodingType.JPEG,
+	        mediaType: Camera.MediaType.PICTURE,
+	        allowEdit: true,
+	        correctOrientation: true  //Corrects Android orientation quirks
+	    }
+	    return options;
+  }
+  
+  function openFilePicker(selection) {
+
+	    var srcType = Camera.PictureSourceType.SAVEDPHOTOALBUM;
+	    var options = setOptions(srcType);
+
+	    navigator.camera.getPicture(function cameraSuccess(imageUri) {
+	    	$scope.$apply(function() {
+	    		$scope.imageSource = imageUri;
+	    	});
+	    }, function cameraError(error) {
+	        console.debug("Unable to obtain picture: " + error, "app");
+
+	    }, options);
+	}
 })
 
 .controller('ItemController', function($scope, $stateParams, $ionicPopup, Items, Users) {
@@ -116,6 +149,8 @@ angular.module('starter.controllers', [])
 		  });
 
 		  myPopup.then(function(commentText) {
+			if (!commentText) return;
+			
 			var user = Users.getAuthenticatedUser();
 		    var comment = {
 		    	user: user,

@@ -32,6 +32,8 @@ angular.module('starter.services', [])
 		id : 1,
 		image : 'img/porch_rocker.jpg',
 		owner : 'Molly',
+		rating: 'Gently Used',
+		details: "No longer squeaks when it rocks, deep spruce color.",
 		price : '$29.99'
 	}, 
 	{
@@ -62,6 +64,8 @@ angular.module('starter.services', [])
 		id : 3,
 		image : 'img/lipstick.jpg',
 		owner : 'Zoey',
+		rating: 'Brand New',
+		details: "Kylie Jenners new Blipstick in the shade Mary Jo.",
 		price : '$14.99'
 	  } 
 	 ];

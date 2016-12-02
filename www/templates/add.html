@@ -20,8 +20,15 @@
     <textarea rows="6" ng-model="itemData.details"></textarea>
     
   </label>
+	<div ng-show="imageSource" class="item item-body">
+		<img class="full-image" src="{{imageSource}}">
+	</div>
+  
 </div>
 
+      <button class="button button-full button-calm" ng-click="uploadPhoto()">
+ Upload Photo
+       </button>
       <button class="button button-full button-royal" ng-click="donate()">
  Donate
       </button>
